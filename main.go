@@ -9,12 +9,11 @@ import (
 func main() {
 	app := fiber.New()
 
-	//run database connection
+	//run database
 	configs.ConnectDB()
 
-	//REST API routes
+	//routes
 	routes.AppointmentRoute(app)
 
-	//Port defined
 	app.Listen(":6000")
 }
