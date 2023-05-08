@@ -16,7 +16,7 @@ import (
 )
 
 var appointmentCollection *mongo.Collection = configs.GetCollection(configs.DB, "appointments")
-var validate = validator.New()
+var validateAppointment = validator.New()
 
 // Create a new Appointment
 func CreateAppointment(c *fiber.Ctx) error {
@@ -30,7 +30,7 @@ func CreateAppointment(c *fiber.Ctx) error {
 	}
 
 	//use the validator library to validate required fields
-	if validationErr := validate.Struct(&appointment); validationErr != nil {
+	if validationErr := validateAppointment.Struct(&appointment); validationErr != nil {
 		return c.Status(http.StatusBadRequest).JSON(responses.AppointmentResponse{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
@@ -86,7 +86,7 @@ func EditAppointment(c *fiber.Ctx) error {
 	}
 
 	//use the validator library to validate required fields
-	if validationErr := validate.Struct(&appointment); validationErr != nil {
+	if validationErr := validateAppointment.Struct(&appointment); validationErr != nil {
 		return c.Status(http.StatusBadRequest).JSON(responses.AppointmentResponse{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 

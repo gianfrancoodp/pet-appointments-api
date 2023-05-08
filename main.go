@@ -13,7 +13,8 @@ func main() {
 	configs.ConnectDB()
 
 	//routes
-	routes.AppointmentRoute(app)
+	routes.AppointmentRoutes(app)
+	routes.OwnerRoutes(app)
 
 	app.Listen(":6000")
 }
