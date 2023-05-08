@@ -15,6 +15,7 @@ func main() {
 	//routes
 	routes.AppointmentRoutes(app)
 	routes.OwnerRoutes(app)
+	routes.PetRoutes(app)
 
 	app.Listen(":6000")
 }
