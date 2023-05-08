@@ -6,9 +6,9 @@ import (
 )
 
 func OwnerRoutes(app *fiber.App) {
-	app.Post("/appointment", controllers.CreateOwner)
-	app.Get("/appointment/:appointmentId", controllers.GetOwner)
-	app.Put("/appointment/:appointmentId", controllers.EditOwner)
-	app.Delete("/appointment/:appointmentId", controllers.DeleteOwner)
-	app.Get("/appointments", controllers.GetAllOwners)
+	app.Post("/owner", controllers.CreateOwner)
+	app.Get("/owner/:ownerId", controllers.GetOwner)
+	app.Put("/owner/:ownerId", controllers.EditOwner)
+	app.Delete("/owner/:ownerId", controllers.DeleteOwner)
+	app.Get("/owners", controllers.GetAllOwners)
 }
