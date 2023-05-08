@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "36bd2fcd-881d-482a-915c-188a29ee8ac4",
+		"name": "Pet-Appointments-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18370734"
+	},
+	"item": [
+		{
+			"name": "Appointment Endpoints",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OwnerId\": 1,\r\n\t\"PetId\": 1,\r\n\t\"PartnerId\": 3,\r\n\t\"Service\": \"Dog Training\",\r\n\t\"Amount\": 20,\r\n\t\"PaymentType\": \"Debit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6000/appointment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"appointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/appointments/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"appointments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/appointment/64597773fbda4f9d083f54e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"appointment",
+								"64597773fbda4f9d083f54e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OwnerId\": 1,\r\n\t\"PetId\": 2,\r\n\t\"PartnerId\": 3,\r\n\t\"Service\": \"Dog Training\",\r\n\t\"Amount\": 25,\r\n\t\"PaymentType\": \"Debit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6000/appointment/64597773fbda4f9d083f54e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"appointment",
+								"64597773fbda4f9d083f54e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/appointment/64597773fbda4f9d083f54e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"appointment",
+								"64597773fbda4f9d083f54e0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

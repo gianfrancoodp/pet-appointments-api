@@ -90,7 +90,7 @@ func EditAppointment(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(responses.AppointmentResponse{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
-	update := bson.M{"ownerId": appointment.OwnerId, "petId": appointment.PetId, "partnerId": appointment.PartnerId, "service": appointment.Service, "amount": appointment.Amount, "paymentType": appointment.PaymentType}
+	update := bson.M{"petId": appointment.PetId, "partnerId": appointment.PartnerId, "service": appointment.Service, "amount": appointment.Amount, "paymentType": appointment.PaymentType}
 
 	result, err := appointmentCollection.UpdateOne(ctx, bson.M{"id": objId}, bson.M{"$set": update})
 

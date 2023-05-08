@@ -13,5 +13,5 @@ type Appointment struct {
 	Service     string             `json:"service,omitempty" validate:"required"`
 	Amount      float64            `json:"amount,omitempty" validate:"required"`
 	PaymentType string             `json:"paymentType,omitempty" validate:"required"`
-	Date        time.Time          `json:"date,omitempty" form:"date" gorm:"index" validate:"required"`
+	Date        time.Time          `json:"date,omitempty" form:"date"`
 }
