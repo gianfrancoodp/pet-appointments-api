@@ -1,9 +1,9 @@
 package main
 
 import (
-	"car-dealer-api/configs"
-	"car-dealer-api/routes"
 	"github.com/gofiber/fiber/v2"
+	"pet-appointments-api/configs"
+	"pet-appointments-api/routes"
 )
 
 func main() {
@@ -13,7 +13,7 @@ func main() {
 	configs.ConnectDB()
 
 	//routes
-	routes.CarRoute(app)
+	routes.AppointmentRoute(app)
 
 	app.Listen(":6000")
 }
