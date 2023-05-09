@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="794c22db-74de-4c07-aaea-c06dc6e21394" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_8_2023_9_19_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_8_2023_9_19_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_8_2023_9_34_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_8_2023_9_34_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/appointment.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/appointment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/owner.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/owner.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/pet.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/pet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Postman/Pet-Appointments-API.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/test/Postman/Pet-Appointments-API.postman_collection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

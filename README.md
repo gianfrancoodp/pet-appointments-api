@@ -27,7 +27,7 @@ HTTP connections on port 6000, so point your client at
  go run main.go
 ```
 
-## Consuming the REST API Endpoints
+## REST API Manual Testing with Postman
 
 The REST API Endpoints could be consumed in *Postman*. The collection file is in the "*routes*" folder, you can open this file in your Postman application:
 
