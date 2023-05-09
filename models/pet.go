@@ -7,7 +7,7 @@ import (
 
 type Pet struct {
 	Id           primitive.ObjectID `json:"id,omitempty"`
-	OwnerId      int                `json:"ownerId,omitempty" validate:"required"`
+	OwnerId      string             `json:"ownerId,omitempty" validate:"required"`
 	Name         string             `json:"name,omitempty" validate:"required"`
 	Age          int                `json:"age,omitempty" validate:"required"`
 	PetType      string             `json:"petType,omitempty" validate:"required"`
