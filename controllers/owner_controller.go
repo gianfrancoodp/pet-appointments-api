@@ -85,7 +85,7 @@ func EditOwner(c *fiber.Ctx) error {
 	}
 
 	//use the validator library to validate required fields
-	if validationErr := validateAppointment.Struct(&owner); validationErr != nil {
+	if validationErr := validateOwner.Struct(&owner); validationErr != nil {
 		return c.Status(http.StatusBadRequest).JSON(responses.OwnerResponse{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
@@ -94,7 +94,7 @@ func EditOwner(c *fiber.Ctx) error {
 	result, err := ownerCollection.UpdateOne(ctx, bson.M{"id": objId}, bson.M{"$set": update})
 
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.OwnerResponse{Status: http.StatusInternalServerError, Message: "Error: the Owner edit process failed.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.OwnerResponse{Status: http.StatusInternalServerError, Message: "Error: The Owner edit process failed.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//get updated owner details
@@ -103,7 +103,7 @@ func EditOwner(c *fiber.Ctx) error {
 		err := ownerCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&updatedOwner)
 
 		if err != nil {
-			return c.Status(http.StatusInternalServerError).JSON(responses.OwnerResponse{Status: http.StatusInternalServerError, Message: "Error: the Owner edit process failed.", Data: &fiber.Map{"data": err.Error()}})
+			return c.Status(http.StatusInternalServerError).JSON(responses.OwnerResponse{Status: http.StatusInternalServerError, Message: "Error: The Owner edit process failed.", Data: &fiber.Map{"data": err.Error()}})
 		}
 	}
 
