@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"OwnerId\": 1,\r\n\t\"PetId\": 1,\r\n\t\"PartnerId\": 3,\r\n\t\"Service\": \"Dog Training\",\r\n\t\"Amount\": 20,\r\n\t\"PaymentType\": \"Debit\"\r\n}",
+							"raw": "{\r\n    \"OwnerId\": \"64599a1f879f898db6b0f981\",\r\n\t\"PetId\": \"64599bf4879f898db6b0f98b\",\r\n\t\"PartnerId\": \"64599d5b879f898db6b0f98f\",\r\n\t\"Service\": \"Pet Photographer\",\r\n\t\"Amount\": 15,\r\n\t\"PaymentType\": \"Credit\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,7 +63,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:6000/appointment/64597773fbda4f9d083f54e0",
+							"raw": "http://localhost:6000/appointment/64599ef8549218e853dfe2e1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -71,7 +71,7 @@
 							"port": "6000",
 							"path": [
 								"appointment",
-								"64597773fbda4f9d083f54e0"
+								"64599ef8549218e853dfe2e1"
 							]
 						}
 					},
@@ -84,7 +84,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"OwnerId\": 1,\r\n\t\"PetId\": 2,\r\n\t\"PartnerId\": 3,\r\n\t\"Service\": \"Dog Training\",\r\n\t\"Amount\": 25,\r\n\t\"PaymentType\": \"Debit\"\r\n}",
+							"raw": "{\r\n    \"OwnerId\": \"64599a1f879f898db6b0f981\",\r\n\t\"PetId\": \"64599bf4879f898db6b0f98b\",\r\n\t\"PartnerId\": \"64599d5b879f898db6b0f98f\",\r\n\t\"Service\": \"Pet Photographer\",\r\n\t\"Amount\": 5,\r\n\t\"PaymentType\": \"Credit\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,7 +92,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:6000/appointment/64597773fbda4f9d083f54e0",
+							"raw": "http://localhost:6000/appointment/64599f14549218e853dfe2e3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -100,7 +100,7 @@
 							"port": "6000",
 							"path": [
 								"appointment",
-								"64597773fbda4f9d083f54e0"
+								"64599f14549218e853dfe2e3"
 							]
 						}
 					},
@@ -112,7 +112,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:6000/appointment/64597773fbda4f9d083f54e0",
+							"raw": "http://localhost:6000/appointment/64599f23549218e853dfe2e5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -120,7 +120,373 @@
 							"port": "6000",
 							"path": [
 								"appointment",
-								"64597773fbda4f9d083f54e0"
+								"64599f23549218e853dfe2e5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pet Endpoints",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OwnerId\": \"64599a1f879f898db6b0f981\",\r\n\t\"Name\": \"Doggi\",\r\n\t\"Age\": 1,\r\n\t\"PetType\": \"Dog\",\r\n\t\"Breed\": \"Chihuahua\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6000/pet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/pets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"pets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/pet/645996718750beba392a28a3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"pet",
+								"645996718750beba392a28a3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ownerId\": \"64599993879f898db6b0f97d\",\r\n    \"name\": \"Gardfield\",\r\n    \"age\": 2,\r\n    \"petType\": \"Cat\",\r\n    \"breed\": \"Abisinio\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6000/pet/64599baa879f898db6b0f985",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"pet",
+								"64599baa879f898db6b0f985"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/pet/645996b48750beba392a28a5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"pet",
+								"645996b48750beba392a28a5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Owner Endpoints",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Maria\",\r\n\t\"LastName\": \"Sanchez\",\r\n\t\"IdNumber\": 29568452,\r\n\t\"Phone\": 75378152,\r\n\t\"Email\": \"marisan852@gmail.com\",\r\n\t\"Pets\": [\"645996b48750beba392a28a5\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6000/owner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"owner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/owners/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"owners",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/owner/64599993879f898db6b0f97d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"owner",
+								"64599993879f898db6b0f97d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"64599993879f898db6b0f97d\",\r\n    \"name\": \"Carlos\",\r\n    \"lastName\": \"Perez\",\r\n    \"idNumber\": 24339624,\r\n    \"phone\": 75536000,\r\n    \"email\": \"carlosperez94@gmail.com\",\r\n    \"creationDate\": \"2023-05-09T00:53:39.998Z\",\r\n    \"pets\": [\r\n        \"645996128750beba392a289d\",\r\n        \"645996448750beba392a289f\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6000/owner/64599993879f898db6b0f97d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"owner",
+								"64599993879f898db6b0f97d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/owner/64599aff879f898db6b0f983",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"owner",
+								"64599aff879f898db6b0f983"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Partner Endpoints",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Carla\",\r\n\t\"LastName\": \"Gomez\",\r\n\t\"IdNumber\": 20611352,\r\n\t\"Phone\": 75967031,\r\n\t\"Email\": \"cg1990@hotmail.com\",\r\n\t\"Services\": [\"Grooming\", \"Veterinarians\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6000/partner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"partner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/partners/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"partners",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/partner/64599d5b879f898db6b0f98f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"partner",
+								"64599d5b879f898db6b0f98f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Carla\",\r\n\t\"LastName\": \"Gomez\",\r\n\t\"IdNumber\": 20611352,\r\n\t\"Phone\": 75967031,\r\n\t\"Email\": \"cg1990@hotmail.com\",\r\n\t\"Services\": [\"Grooming\", \"Veterinarians\", \"Pet Photographer\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6000/partner/64599d5b879f898db6b0f98f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"partner",
+								"64599d5b879f898db6b0f98f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6000/partner/64599dbe879f898db6b0f991",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6000",
+							"path": [
+								"partner",
+								"64599dbe879f898db6b0f991"
 							]
 						}
 					},

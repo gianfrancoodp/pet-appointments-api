@@ -13,5 +13,5 @@ type Owner struct {
 	Phone        int                `json:"phone,omitempty" validate:"required"`
 	Email        string             `json:"email,omitempty" validate:"required"`
 	CreationDate time.Time          `json:"creationDate,omitempty" form:"date"`
-	Pets         []int              `json:"pets,omitempty"`
+	Pets         []string           `json:"pets,omitempty"`
 }
