@@ -26,12 +26,12 @@ func CreateAppointment(c *fiber.Ctx) error {
 
 	//validate the request body
 	if err := c.BodyParser(&appointment); err != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.AppointmentResponse{Status: http.StatusBadRequest, Message: "Error: the request body is invalid, please check it again.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "Error: the request body is invalid, please check it again.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//use the validator library to validate required fields
 	if validationErr := validateAppointment.Struct(&appointment); validationErr != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.AppointmentResponse{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
 	newAppointment := models.Appointment{
@@ -47,10 +47,10 @@ func CreateAppointment(c *fiber.Ctx) error {
 
 	result, err := appointmentCollection.InsertOne(ctx, newAppointment)
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.AppointmentResponse{Status: http.StatusInternalServerError, Message: "Error: the Appointment creation process failed.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: the Appointment creation process failed.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
-	return c.Status(http.StatusCreated).JSON(responses.AppointmentResponse{Status: http.StatusCreated, Message: "A new Appointment was created successfully.", Data: &fiber.Map{"data": result}})
+	return c.Status(http.StatusCreated).JSON(responses.Response{Status: http.StatusCreated, Message: "A new Appointment was created successfully.", Data: &fiber.Map{"data": result}})
 }
 
 // Get an Appointment
@@ -65,10 +65,10 @@ func GetAppointment(c *fiber.Ctx) error {
 	//validate if the appointmentId ID exists
 	err := appointmentCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&appointment)
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.AppointmentResponse{Status: http.StatusInternalServerError, Message: "Error: invalid appointment ID.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: invalid appointment ID.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
-	return c.Status(http.StatusOK).JSON(responses.AppointmentResponse{Status: http.StatusOK, Message: "The operation was successfully.", Data: &fiber.Map{"data": appointment}})
+	return c.Status(http.StatusOK).JSON(responses.Response{Status: http.StatusOK, Message: "The operation was successfully.", Data: &fiber.Map{"data": appointment}})
 }
 
 // Edit an Appointment
@@ -82,12 +82,12 @@ func EditAppointment(c *fiber.Ctx) error {
 
 	//validate the request body
 	if err := c.BodyParser(&appointment); err != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.AppointmentResponse{Status: http.StatusBadRequest, Message: "Error: the request body is invalid, please check it again.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "Error: the request body is invalid, please check it again.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//use the validator library to validate required fields
 	if validationErr := validateAppointment.Struct(&appointment); validationErr != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.AppointmentResponse{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
 	update := bson.M{"petId": appointment.PetId, "partnerId": appointment.PartnerId, "service": appointment.Service, "amount": appointment.Amount, "paymentType": appointment.PaymentType}
@@ -95,7 +95,7 @@ func EditAppointment(c *fiber.Ctx) error {
 	result, err := appointmentCollection.UpdateOne(ctx, bson.M{"id": objId}, bson.M{"$set": update})
 
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.AppointmentResponse{Status: http.StatusInternalServerError, Message: "Error: the Appointment edit process failed.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: the Appointment edit process failed.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//get updated appointment details
@@ -104,11 +104,11 @@ func EditAppointment(c *fiber.Ctx) error {
 		err := appointmentCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&updatedAppointment)
 
 		if err != nil {
-			return c.Status(http.StatusInternalServerError).JSON(responses.AppointmentResponse{Status: http.StatusInternalServerError, Message: "Error: the Appointment edit process failed.", Data: &fiber.Map{"data": err.Error()}})
+			return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: the Appointment edit process failed.", Data: &fiber.Map{"data": err.Error()}})
 		}
 	}
 
-	return c.Status(http.StatusOK).JSON(responses.AppointmentResponse{Status: http.StatusOK, Message: "The Appointment with the ID " + appointmentId + " was edited correctly.", Data: &fiber.Map{"data": updatedAppointment}})
+	return c.Status(http.StatusOK).JSON(responses.Response{Status: http.StatusOK, Message: "The Appointment with the ID " + appointmentId + " was edited correctly.", Data: &fiber.Map{"data": updatedAppointment}})
 }
 
 // Delete an Appointment
@@ -123,18 +123,18 @@ func DeleteAppointment(c *fiber.Ctx) error {
 
 	//validate if the DeleteOne functions returns an Error
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.AppointmentResponse{Status: http.StatusInternalServerError, Message: "Error: There is no appointment with that ID. ", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: There is no appointment with that ID. ", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//validate the ID number
 	if result.DeletedCount < 1 {
 		return c.Status(http.StatusNotFound).JSON(
-			responses.AppointmentResponse{Status: http.StatusNotFound, Message: "Error", Data: &fiber.Map{"data": "Error: The appointment with the ID " + appointmentId + " does not exists."}},
+			responses.Response{Status: http.StatusNotFound, Message: "Error", Data: &fiber.Map{"data": "Error: The appointment with the ID " + appointmentId + " does not exists."}},
 		)
 	}
 
 	return c.Status(http.StatusOK).JSON(
-		responses.AppointmentResponse{Status: http.StatusOK, Message: "Success", Data: &fiber.Map{"data": "The appointment was deleted successfully."}},
+		responses.Response{Status: http.StatusOK, Message: "Success", Data: &fiber.Map{"data": "The appointment was deleted successfully."}},
 	)
 }
 
@@ -148,7 +148,7 @@ func GetAllAppointments(c *fiber.Ctx) error {
 
 	//validate if the context has a collection
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.AppointmentResponse{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//reading from the db in an optimal way
@@ -156,13 +156,13 @@ func GetAllAppointments(c *fiber.Ctx) error {
 	for results.Next(ctx) {
 		var singleAppointment models.Appointment
 		if err = results.Decode(&singleAppointment); err != nil {
-			return c.Status(http.StatusInternalServerError).JSON(responses.AppointmentResponse{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"data": err.Error()}})
+			return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"data": err.Error()}})
 		}
 
 		appointments = append(appointments, singleAppointment)
 	}
 
 	return c.Status(http.StatusOK).JSON(
-		responses.AppointmentResponse{Status: http.StatusOK, Message: "Success", Data: &fiber.Map{"data": appointments}},
+		responses.Response{Status: http.StatusOK, Message: "Success", Data: &fiber.Map{"data": appointments}},
 	)
 }

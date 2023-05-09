@@ -17,7 +17,7 @@ import (
 var petCollection *mongo.Collection = configs.GetCollection(configs.DB, "pets")
 var validatePet = validator.New()
 
-// Create a new Appointment
+// Create a new Pet
 func CreatePet(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var pet models.Pet
@@ -25,12 +25,12 @@ func CreatePet(c *fiber.Ctx) error {
 
 	//validate the request body
 	if err := c.BodyParser(&pet); err != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.PetResponse{Status: http.StatusBadRequest, Message: "Error: the request body is invalid, please check it again.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "Error: the request body is invalid, please check it again.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//use the validator library to validate required fields
 	if validationErr := validatePet.Struct(&pet); validationErr != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.PetResponse{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
 	newPet := models.Pet{
@@ -45,13 +45,13 @@ func CreatePet(c *fiber.Ctx) error {
 
 	result, err := petCollection.InsertOne(ctx, newPet)
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.PetResponse{Status: http.StatusInternalServerError, Message: "Error: The Pet creation process failed.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: The Pet creation process failed.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
-	return c.Status(http.StatusCreated).JSON(responses.PetResponse{Status: http.StatusCreated, Message: "A new Pet was created successfully.", Data: &fiber.Map{"data": result}})
+	return c.Status(http.StatusCreated).JSON(responses.Response{Status: http.StatusCreated, Message: "A new Pet was created successfully.", Data: &fiber.Map{"data": result}})
 }
 
-// Get an Appointment
+// Get a Pet
 func GetPet(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	petId := c.Params("petId")
@@ -63,13 +63,13 @@ func GetPet(c *fiber.Ctx) error {
 	//validate if the pet ID exists
 	err := petCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&pet)
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.PetResponse{Status: http.StatusInternalServerError, Message: "Error: invalid pet ID.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: invalid pet ID.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
-	return c.Status(http.StatusOK).JSON(responses.PetResponse{Status: http.StatusOK, Message: "The operation was successfully.", Data: &fiber.Map{"data": pet}})
+	return c.Status(http.StatusOK).JSON(responses.Response{Status: http.StatusOK, Message: "The operation was successfully.", Data: &fiber.Map{"data": pet}})
 }
 
-// Edit an Appointment
+// Edit a Pet
 func EditPet(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	petId := c.Params("petId")
@@ -80,12 +80,12 @@ func EditPet(c *fiber.Ctx) error {
 
 	//validate the request body
 	if err := c.BodyParser(&pet); err != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.PetResponse{Status: http.StatusBadRequest, Message: "Error: the request body is invalid, please check it again.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "Error: the request body is invalid, please check it again.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//use the validator library to validate required fields
 	if validationErr := validatePet.Struct(&pet); validationErr != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.PetResponse{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "Error: some fields could be invalid.", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
 	update := bson.M{"ownerId": pet.OwnerId, "name": pet.Name, "age": pet.Age, "petType": pet.PetType, "breed": pet.Breed}
@@ -93,7 +93,7 @@ func EditPet(c *fiber.Ctx) error {
 	result, err := petCollection.UpdateOne(ctx, bson.M{"id": objId}, bson.M{"$set": update})
 
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.PetResponse{Status: http.StatusInternalServerError, Message: "Error: the Pet edit process failed.", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: the Pet edit process failed.", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//get updated owner details
@@ -102,14 +102,14 @@ func EditPet(c *fiber.Ctx) error {
 		err := petCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&updatedPet)
 
 		if err != nil {
-			return c.Status(http.StatusInternalServerError).JSON(responses.PetResponse{Status: http.StatusInternalServerError, Message: "Error: The Pet edit process failed.", Data: &fiber.Map{"data": err.Error()}})
+			return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: The Pet edit process failed.", Data: &fiber.Map{"data": err.Error()}})
 		}
 	}
 
-	return c.Status(http.StatusOK).JSON(responses.PetResponse{Status: http.StatusOK, Message: "The Pet with the ID " + petId + " was edited correctly.", Data: &fiber.Map{"data": updatedPet}})
+	return c.Status(http.StatusOK).JSON(responses.Response{Status: http.StatusOK, Message: "The Pet with the ID " + petId + " was edited correctly.", Data: &fiber.Map{"data": updatedPet}})
 }
 
-// Delete an Appointment
+// Delete a Pet
 func DeletePet(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	petId := c.Params("petId")
@@ -121,22 +121,22 @@ func DeletePet(c *fiber.Ctx) error {
 
 	//validate if the DeleteOne functions returns an Error
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.PetResponse{Status: http.StatusInternalServerError, Message: "Error: There is no pet with that ID. ", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error: There is no pet with that ID. ", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//validate the ID number
 	if result.DeletedCount < 1 {
 		return c.Status(http.StatusNotFound).JSON(
-			responses.PetResponse{Status: http.StatusNotFound, Message: "Error", Data: &fiber.Map{"data": "Error: The Pet with the ID " + petId + " does not exists."}},
+			responses.Response{Status: http.StatusNotFound, Message: "Error", Data: &fiber.Map{"data": "Error: The Pet with the ID " + petId + " does not exists."}},
 		)
 	}
 
 	return c.Status(http.StatusOK).JSON(
-		responses.PetResponse{Status: http.StatusOK, Message: "Success", Data: &fiber.Map{"data": "The Pet was deleted successfully."}},
+		responses.Response{Status: http.StatusOK, Message: "Success", Data: &fiber.Map{"data": "The Pet was deleted successfully."}},
 	)
 }
 
-// Get All Appointments
+// Get All Pets
 func GetAllPets(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var pets []models.Pet
@@ -146,7 +146,7 @@ func GetAllPets(c *fiber.Ctx) error {
 
 	//validate if the context has a collection
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.PetResponse{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//reading from the db in an optimal way
@@ -154,13 +154,13 @@ func GetAllPets(c *fiber.Ctx) error {
 	for results.Next(ctx) {
 		var singlePet models.Pet
 		if err = results.Decode(&singlePet); err != nil {
-			return c.Status(http.StatusInternalServerError).JSON(responses.PetResponse{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"data": err.Error()}})
+			return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"data": err.Error()}})
 		}
 
 		pets = append(pets, singlePet)
 	}
 
 	return c.Status(http.StatusOK).JSON(
-		responses.PetResponse{Status: http.StatusOK, Message: "Success", Data: &fiber.Map{"data": pets}},
+		responses.Response{Status: http.StatusOK, Message: "Success", Data: &fiber.Map{"data": pets}},
 	)
 }
